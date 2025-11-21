@@ -72,18 +72,19 @@ export default function App() {
   const [calmActive, setCalmActive] = useState(false);
   const [ultReady, setUltReady] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
+  
+  // Estado para el mensaje especial de la música
+  const [showMusicMessage, setShowMusicMessage] = useState(false);
 
   const audioRef = useRef(null);
   const btnRef = useRef(null);
   const chatEndRef = useRef(null);
 
   // --- CONFIGURACIÓN DE FOTOS ---
-  // JEAN: Aquí pon los links reales de las fotos de ella.
-  // Puedes usar links de Imgur, Discord, o fotos que tengas en la carpeta 'public'.
   const galleryPhotos = [
-    "https://i.ibb.co/dJQCmtMZ/Imagen-de-Whats-App-2025-11-14-a-las-15-26-42-edf4e3a4.jpg", // Foto 1 (Ejemplo)
-    "https://i.ibb.co/4ZGDQ81Y/Imagen-de-Whats-App-2025-10-08-a-las-18-32-34-66b630b6.jpg", // Foto 2 (Ejemplo)
-    "https://i.ibb.co/YTfmBNKS/Imagen-de-Whats-App-2025-11-14-a-las-15-26-42-0b4b452c.jpg", // Foto 3 (Ejemplo)
+    "https://i.ibb.co/dJQCmtMZ/Imagen-de-Whats-App-2025-11-14-a-las-15-26-42-edf4e3a4.jpg", // Foto 1
+    "https://i.ibb.co/4ZGDQ81Y/Imagen-de-Whats-App-2025-10-08-a-las-18-32-34-66b630b6.jpg", // Foto 2
+    "https://i.ibb.co/YTfmBNKS/Imagen-de-Whats-App-2025-11-14-a-las-15-26-42-0b4b452c.jpg", // Foto 3
   ];
 
   const sageQuotes = [
@@ -132,6 +133,21 @@ export default function App() {
 
   const addChatMessage = (text, sender = "Sage (Jean)", type = "team") => {
     setChatMessages(prev => [...prev, { id: Date.now(), sender, text, type }]);
+  };
+
+  // --- MANEJO DE MÚSICA ---
+  const toggleMusic = () => {
+    if (!musicActive) {
+      // Encender música y mostrar mensaje
+      setMusicActive(true);
+      setShowMusicMessage(true);
+      // Ocultar el mensaje automáticamente después de 4 segundos
+      setTimeout(() => setShowMusicMessage(false), 4000);
+    } else {
+      // Apagar música
+      setMusicActive(false);
+      setShowMusicMessage(false);
+    }
   };
 
   const handleHeal = () => {
@@ -203,7 +219,7 @@ export default function App() {
 
       {/* --- GALERÍA LATERAL DESLIZANTE --- */}
       <div className={`fixed inset-0 z-[60] pointer-events-none ${showGallery ? 'pointer-events-auto' : ''}`}>
-        {/* Fondo oscuro (Backdrop) */}
+        {/* Fondo oscuro */}
         <div 
           className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${showGallery ? 'opacity-100' : 'opacity-0'}`}
           onClick={() => setShowGallery(false)}
@@ -234,7 +250,6 @@ export default function App() {
             {galleryPhotos.map((photo, index) => (
               <div key={index} className="group relative aspect-[4/5] bg-slate-800 rounded-lg overflow-hidden border-2 border-slate-700 hover:border-orange-500 transition-all duration-300">
                 <img src={photo} alt={`Gumynola ${index + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                {/* Overlay gradiente */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
                 <div className="absolute bottom-3 left-3 right-3">
                   <span className="text-xs font-mono text-orange-400 bg-black/50 px-2 py-1 rounded backdrop-blur-md border border-orange-500/30">
@@ -287,9 +302,18 @@ export default function App() {
         </div>
       </div>
 
-      {/* Botón Música */}
-      <div className="absolute bottom-32 right-6 z-50">
-        <button onClick={() => setMusicActive(!musicActive)} className={`p-3 rounded-full border transition-all duration-300 ${musicActive ? 'bg-pink-500/20 border-pink-500 text-pink-400 animate-pulse' : 'bg-slate-800/50 border-slate-600 text-slate-500'}`}>
+      {/* Botón Música + Mensaje Especial */}
+      <div className="absolute bottom-32 right-6 z-50 flex flex-col items-end gap-2">
+        {showMusicMessage && (
+          <div className="animate-fade-in-up bg-pink-500/90 text-white px-4 py-2 rounded-t-xl rounded-bl-xl rounded-br-none shadow-lg border border-pink-300 text-sm font-bold tracking-wide whitespace-nowrap relative">
+            Quiero ser tu manta :p
+            <div className="absolute -bottom-1 right-0 w-3 h-3 bg-pink-500/90 rotate-45"></div>
+          </div>
+        )}
+        <button 
+          onClick={toggleMusic} 
+          className={`p-3 rounded-full border transition-all duration-300 ${musicActive ? 'bg-pink-500/20 border-pink-500 text-pink-400 animate-pulse' : 'bg-slate-800/50 border-slate-600 text-slate-500'}`}
+        >
           <Music className="w-6 h-6" />
         </button>
       </div>
