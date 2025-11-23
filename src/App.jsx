@@ -228,11 +228,11 @@ export default function App() {
         {/* Panel Lateral */}
         <div className={`absolute top-0 left-0 h-full w-full max-w-sm bg-slate-900/95 border-r border-slate-700 shadow-2xl transform transition-transform duration-500 ease-out p-6 flex flex-col ${showGallery ? 'translate-x-0' : '-translate-x-full'}`}>
           
-          {/* POCHACCO ASOMADO (Pegado a la pared izquierda) */}
+          {/* POCHACCO ASOMADO (Z-INDEX AUMENTADO a 50) */}
           <img 
             src="/pochacco-peek.png" 
             alt="Pochacco asomado" 
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-20 md:w-24 z-10 pointer-events-none opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-110"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-20 md:w-24 z-50 pointer-events-none opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-110"
           />
 
           <div className="flex justify-between items-center mb-8 pl-4">
