@@ -227,7 +227,15 @@ export default function App() {
         
         {/* Panel Lateral */}
         <div className={`absolute top-0 left-0 h-full w-full max-w-sm bg-slate-900/95 border-r border-slate-700 shadow-2xl transform transition-transform duration-500 ease-out p-6 flex flex-col ${showGallery ? 'translate-x-0' : '-translate-x-full'}`}>
-          <div className="flex justify-between items-center mb-8">
+          
+          {/* POCHACCO ASOMADO (Pegado a la pared izquierda) */}
+          <img 
+            src="/pochacco-peek.png" 
+            alt="Pochacco asomado" 
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-20 md:w-24 z-10 pointer-events-none opacity-90 hover:opacity-100 transition-all duration-300 hover:scale-110"
+          />
+
+          <div className="flex justify-between items-center mb-8 pl-4">
             <div className="flex items-center gap-3 text-orange-500">
               <Camera className="w-6 h-6" />
               <h2 className="text-xl font-bold font-mono tracking-wider uppercase">Galería</h2>
@@ -241,7 +249,7 @@ export default function App() {
           </div>
 
           {/* Grid de Fotos */}
-          <div className="flex-1 overflow-y-auto pr-2 space-y-4 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto pr-2 space-y-4 custom-scrollbar relative z-20">
             <div className="bg-orange-500/10 border border-orange-500/30 p-4 rounded mb-4 text-sm text-orange-200">
               <p className="flex items-center gap-2 mb-1 font-bold"><Zap className="w-4 h-4"/> MVP GG :p</p>
               <p className="opacity-80 text-xs">Aquí algunas fotos para que veas lo linda q te ves sonriendo :p</p>
@@ -261,6 +269,15 @@ export default function App() {
             
             <div className="text-center py-8 opacity-50 text-xs font-mono">
               --- FIN DEL CARRETE ---
+            </div>
+
+            {/* POCHACCO ABRAZANDO (Abajo del todo) */}
+            <div className="flex justify-center pb-4">
+              <img 
+                src="/pochacco-hug.png" 
+                alt="Pochacco abrazando" 
+                className="w-32 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
+              />
             </div>
           </div>
         </div>
