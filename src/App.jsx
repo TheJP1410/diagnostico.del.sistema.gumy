@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Heart, Sparkles, Flower, ShieldPlus, Music, Zap, Shield, Bot, Snowflake, X, Camera, ChevronRight } from 'lucide-react';
+import { Heart, Sparkles, Flower, ShieldPlus, Music, Zap, Shield, Bot, Snowflake, X, Camera, ChevronRight, ExternalLink } from 'lucide-react';
 
 // --- COMPONENTES VISUALES ---
 
@@ -271,13 +271,25 @@ export default function App() {
               --- FIN DEL CARRETE ---
             </div>
 
-            {/* POCHACCO ABRAZANDO (Abajo del todo) */}
+            {/* POCHACCO ABRAZANDO (AHORA ES UN BOTÓN DE ENLACE) */}
             <div className="flex justify-center pb-4">
-              <img 
-                src="/pochacco-hug.png" 
-                alt="Pochacco abrazando" 
-                className="w-32 opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-500"
-              />
+              <a 
+                href="https://thejp1410.github.io/Gumy/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                title="Ir a Gumy"
+                className="group relative transition-transform duration-500 hover:scale-110 cursor-pointer"
+              >
+                {/* Icono de enlace externo flotante */}
+                <div className="absolute -top-2 -right-2 bg-emerald-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity z-10 shadow-lg">
+                  <ExternalLink className="w-4 h-4" />
+                </div>
+                <img 
+                  src="/pochacco-hug.png" 
+                  alt="Ir a Gumy" 
+                  className="w-32 opacity-80 hover:opacity-100"
+                />
+              </a>
             </div>
           </div>
         </div>
